@@ -59,7 +59,7 @@ public class TeleOp_v1 extends LinearOpMode
             double slidesdown = gamepad1.left_trigger;
 
             // arm controls
-            double shootfor = gamepad1.left_trigger;
+            double arm = gamepad1.right_bumper;
             double shootback = gamepad2.right_trigger;
 
             // intake & conveyer controls
@@ -72,7 +72,7 @@ public class TeleOp_v1 extends LinearOpMode
             double br = speed - turn + strafe;
             double bl = speed + turn - strafe;
 
-            double s = shootfor - shootback;
+            double s = slidesup - slidesdown;
             double a = armfor - armback;
 
             //set power to drivetrain motors with range of -1 to 1
