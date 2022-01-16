@@ -58,14 +58,6 @@ public class TeleOp_v1 extends LinearOpMode
             double slidesup = gamepad1.right_trigger;
             double slidesdown = gamepad1.left_trigger;
 
-            // arm controls
-            double arm = gamepad1.right_bumper;
-            double shootback = gamepad2.right_trigger;
-
-            // intake & conveyer controls
-            double takein = gamepad2.right_stick_y;
-            double convey = gamepad2.left_stick_y;
-
             //determine power for each motor
             double fl = speed + turn + strafe;
             double fr = speed - turn - strafe;
@@ -73,7 +65,7 @@ public class TeleOp_v1 extends LinearOpMode
             double bl = speed + turn - strafe;
 
             double s = slidesup - slidesdown;
-            double a = armfor - armback;
+            double a = 0.5;
 
             //set power to drivetrain motors with range of -1 to 1
             fldrive.setPower(Range.clip(fl, -1.0, 1.0));
@@ -84,26 +76,10 @@ public class TeleOp_v1 extends LinearOpMode
             //set power and direction for other motors
             shooter.setPower(Range.clip(s, -1.0, 1.0));
 
-            if (gamepad1.b)
+            if(gamepad1.b)
             {
-                arm.setPower(Range.clip(a, -0.1, 0.1));
+                arm.setPower(Math.abs(a));
             }
-            else
-            {
-                arm.setPower(Range.clip(a, -0.5, 0.5));
-            }
-
-            if (gamepad2.b)
-            {
-                conveyor.setPower(Range.clip(convey, -0.1, 0.1));
-                intake.setPower(Range.clip(takein, -0.1, 0.1));
-            }
-            else
-            {
-                conveyor.setPower(Range.clip(convey, -1.0, 1.0));
-                intake.setPower(Range.clip(takein, -1.0, 1.0));
-            }
-
 
             //debug messages for each motor
             telemetry.addData("fldrive",Double.toString(fldrive.getPower()));
